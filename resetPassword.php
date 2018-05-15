@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if (!isset($_SESSION['user_id'])){
+    echo "You have no access to the page.<a href='login.php'> Please Login</a>";
+}else{
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -96,3 +102,4 @@ and open the template in the editor.
 
     </body>
 </html>
+<?php } ?>

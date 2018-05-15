@@ -13,11 +13,11 @@ if (!isset($_SESSION['user_id'])) {
     $month = $_POST['month'];
     $year = $_POST['year'];
     $password = $_POST['password'];
-    $dob = $date + "/" + $month + "/" + $year;
+    $dob = $date."/".$month."/".$year;
     $registerQuery = "INSERT INTO customer (last_name,first_name,gender,avatar,mobile,email,dob,cuisine,otp,otp_expired_time,offline_operator,create_time,update_time,password,status) "
             . "VALUES ('$lastName','$firstName','$gender',null,'$mobile','$email','$dob',null,null,null,null,null,null,'$password',null)";
     $query = mysqli_query($link, $registerQuery)or die(mysqli_error($link));
-    echo $registerQuery;
+//    echo $registerQuery;
     $status = "";
     if ($query) {
         $status .= "You have registered successfully <br/>";

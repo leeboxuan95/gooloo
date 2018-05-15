@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
-    
+        echo "You have already logged in.<a href=''> Home</a>";
+
 } else {
     
-}
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -102,3 +103,4 @@ if (isset($_SESSION['user_id'])) {
     </body>
 
 </html>
+<?php } ?>

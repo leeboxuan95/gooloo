@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])){
+        echo "You have no access to the page.<a href='login.php'> Please Login</a>";
+
+}else{
 $userName = $_POST['username'];
 include "dbFunctions.php";
 $userEmail = $_POST['userEmail'];
@@ -54,3 +59,4 @@ and open the template in the editor.
         ?><a href="index.php">Login Now</a>
     </body>
 </html>
+<?php }?>

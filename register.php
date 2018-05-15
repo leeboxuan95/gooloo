@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
     echo "<a href=''>Home</a>";
 } else {
     
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -73,17 +73,29 @@ and open the template in the editor.
 
                     <div class="panel-body"> 
 
-                        <form class="form-horizontal" role="form" method="post" action="index.php">
+                        <form class="form-horizontal" role="form" method="post" action="doRegister.php">
                             <div class="form-group">
                                 <label for="lastName" class="col-sm-4" control-label>Last Name: </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="last_name" name="lastName" placeholder="Last Name" value="">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="firstName" class="col-sm-4" control-label>First Name: </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="first_name" name="firstName" placeholder="First Name" value="">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" value="">
+                                </div>
+                            </div>
+                                    <div class="form-group">
+                                <label for="mobile" class="col-sm-4" control-label>Mobile number: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile number" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="col-sm-4" control-label>Email add: </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -105,7 +117,7 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label for="password" class="col-sm-4 control-label">Password: </label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -122,3 +134,4 @@ and open the template in the editor.
 
     </body>
 </html>
+<?php }?>

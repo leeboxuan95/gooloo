@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_array($result);
             $_SESSION['user_id'] = $row['id'];
-           
+           header("showRestaurant.php");
         } else {
             $msg = "Sorry, you must enter a valid username 
                     and password to log in.<br/><a href='login.php'>Back</a>";
