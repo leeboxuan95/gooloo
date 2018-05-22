@@ -13,18 +13,46 @@ if (!isset($_SESSION['user_id'])) {
     $month = $_POST['month'];
     $year = $_POST['year'];
     $password = $_POST['password'];
-    $dob = $date."/".$month."/".$year;
-    $registerQuery = "INSERT INTO customer (last_name,first_name,gender,avatar,mobile,email,dob,cuisine,otp,otp_expired_time,offline_operator,create_time,update_time,password,status) "
-            . "VALUES ('$lastName','$firstName','$gender',null,'$mobile','$email','$dob',null,null,null,null,null,null,'$password',null)";
-    $query = mysqli_query($link, $registerQuery)or die(mysqli_error($link));
-//    echo $registerQuery;
-    $status = "";
-    if ($query) {
-        $status .= "You have registered successfully <br/>";
-        $status .= "<a href='login.php'>Login Now</a>";
+    $dob = $date . "/" . $month . "/" . $year;
+     $postal = $_POST['postal'];
+    $country =$_POST['country'];
+    $address = $_POST['address'];
+    $companyName = $_POST['company_name'];
+
+    $accountCheckQuery = "SELECT * FROM customer WHERE email = '$email'";
+    $result = mysqli_query($link, $accountCheckQuery);
+    if (mysqli_num_rows($result) == 1) {
+        echo "Email has been used, please use a new email. <a href='register.php'>Sign up Again.</a>";
     } else {
-        $status .= "Registration failed. <br/>";
-        $status .= "<a href='register.php'>Try Again.</a>";
+
+
+
+        $registerQuery = "INSERT INTO customer (last_name,first_name,gender,avatar,mobile,email,dob,cuisine,otp,otp_expired_time,offline_operator,create_time,update_time,password,status) "
+                . "VALUES ('$lastName','$firstName','$gender',null,'$mobile','$email','$dob',null,null,null,null,NOW(),null,'$password',null)";
+
+        $query = mysqli_query($link, $registerQuery)or die(mysqli_error($link));
+//    echo $registerQuery;
+        $getNewID = "SELECT * FROM customer where email = '$email'";
+        $idQuery = mysqli_query($link, $getNewID);
+        if (mysqli_num_rows($idQuery)==1){
+            $row = mysqli_fetch_array($idQuery);
+        $id = $row['id'];
+            $addAddressQuery = "INSERT INTO customer_address(customer_id,country_id,city_name,postcode,address,create_time,company_name,first_name,last_name,mobile)"
+                . "VALUES ($id,'','$country','$postal','$address',NOW(),'$companyName','$firstName','$lastName','$mobile')";
+            $addressQuery = mysqli_query($link, $addAddressQuery);
+           
+        }else{
+            
+        }
+        $status = "";
+        if ($query) {
+            $status .= "You have registered successfully <br/>";
+            $status .= "<a href='index.php'>Login Now</a>";
+        } else {
+            $status .= "Sign up fail..  <br/>";
+            $status .= "<a href='register.php'>Try Again.</a>";
+        }
+        echo $status;
     }
     ?>
     <!DOCTYPE html>
@@ -42,14 +70,12 @@ if (!isset($_SESSION['user_id'])) {
         </head>
         <body>
             <?php
-            echo $status;
             ?>
 
         </body>
     </html>
     <?php
 } else {
-    echo "You are already logged in. Go to home<br/>";
-    echo "<a href=''>Home</a>";
+    echo "You are already logged in. <a href='showRestaurants.php'>home</a><br/>";
 }
 ?>

@@ -1,7 +1,7 @@
 <?php 
 session_start();
-if (!isset($_SESSION['user_id'])){
-    echo "You have no access to the page.<a href='login.php'> Please Login</a>";
+if (isset($_SESSION['user_id'])){
+    echo "You have no access to the page.<a href='index.php'> Please Login</a>";
 }else{
 ?>
 <!DOCTYPE html>
@@ -74,16 +74,16 @@ and open the template in the editor.
                     <div class="panel-body"> 
 
                         <form method="post" action="doResetPassword.php" class="form-horizontal">
-                            <div class="input-group">
+<!--                            <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 
                                 <input type="text" class="form-control" name="username" placeholder="username">
-                            </div>
+                            </div>-->
 
                             <br>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input  type="email" class="form-control" name="userEmail" placeholder="email">
+                                <input  type="email" class="form-control" name="userEmail" placeholder="Email">
                             </div>
                             <br>
 
@@ -92,7 +92,7 @@ and open the template in the editor.
                         </form><br/>
                        
                     </div>
-                    <a href="login.php">Login</a> |
+                    <a href="index.php">Login</a> |
                     <a href="register.php">Register</a> 
 
                 </div>

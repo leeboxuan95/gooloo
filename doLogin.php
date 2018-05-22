@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'dbFunctions.php';
-$msg = "";
 
 if (!isset($_SESSION['user_id'])) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -17,10 +16,11 @@ if (!isset($_SESSION['user_id'])) {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_array($result);
             $_SESSION['user_id'] = $row['id'];
-           header("showRestaurant.php");
+            $_SESSION['full_name'] = $row['first_name'] . " " . $row['last_name'];
+           header("Location: showRestaurants.php");
         } else {
             $msg = "Sorry, you must enter a valid username 
-                    and password to log in.<br/><a href='login.php'>Back</a>";
+                    and password to log in.<br/><a href='index.php'>Back</a>";
             echo $msg;
         }
     }
