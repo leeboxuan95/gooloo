@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pageTitle = "Select restaurant";
 include "dbFunctions.php";
 
 if (!isset($_SESSION['user_id'])) {
@@ -13,22 +14,32 @@ if (!isset($_SESSION['user_id'])) {
     }
     ?>
     <!DOCTYPE html>
-    <!—
-    To change this license header, choose License Headers in Project Properties.
-    To change this template file, choose Tools | Templates
-    and open the template in the editor.
-    —>
 
 
     <html>
         <head>
             <meta charset="UTF-8">
             <title></title>
+            <link href="css/theme.ice.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/jquery.tablesorter.js" type="text/javascript"></script>
+        <script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
+        <script src="js/jquery.tablesorter.widgets.js" type="text/javascript"></script>
 
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-            <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-            <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+      <script>
 
+            $(document).ready(function () {
+                $("#tableitems").tablesorter();
+                $("#tableitems").tablesorter({sortList: [[1, 0], [3, 0]]});
+                $(".container").hide();
+
+
+            });
+
+        </script>
 
             <style>
                 @font-face {
@@ -48,12 +59,15 @@ if (!isset($_SESSION['user_id'])) {
         <div id="newcontainer">       
 
             <p>All The Delicious Food Near You</p>
-        </div>   <table class="table box-table">
-                <thead>
-                    <tr>
+        </div>  
+                    <div id="tablediv1">
+  <table class="tablesorter-ice" id="tableitems" style="width:95%; margin-left:20px; 
+    margin-right:20px;">    
+      <thead>
+                    <tr style="background-color: lightgray;">
                         <th>Restaurants</th>               
                         <th>Cost Range</th>
-                        <th></th>
+                        <th data-sorter="false" data-filter="false"></th>
                     </tr>
                 </thead>
                 <?php
@@ -71,20 +85,20 @@ if (!isset($_SESSION['user_id'])) {
                     ?>
                     <tbody>
                         <tr>
-                            <td>
-                                <?php
-                                echo "$merchantName <br/>";
+                        <td style="text-align:center">
+                            <?php echo "<img src='ItemsImages/$logo' alt='$logo'/>"; ?>
+ <?php
+                                echo "$merchantName";
                                 ?>                 
-                                <?php echo "<img src='ItemsImages/$logo' alt='$logo' height='150px' width='150px'/>"; ?>
                             </td>
-                            <td>
+                        <td style='padding-top: 45px; text-align:center'>
                                 <?php
                                 $minCost = min($arrCompare);
                                 $maxCost = max($arrCompare);
                                 echo "$minCost ~ $maxCost";
                                 ?>
                             </td>
-                            <td>
+                        <td  style='padding-top: 40px; text-align:center'>
 
                                 <button type="button" class="btn btn-primary">
                                     <a href="viewItems.php?id=<?php echo $merchantId; ?>" style="color: white">Check this out!</a>
@@ -94,6 +108,7 @@ if (!isset($_SESSION['user_id'])) {
                     <?php } ?>
                 </tbody>
             </table>
+                    </div>
             <?php include "footer.php" ?>
 
             <?php
